@@ -16,3 +16,11 @@ python -m http.server 8000
 ```
 
 Then open http://localhost:8000.
+
+## Social preview image
+
+`assets/og-image.png` (1200×630) is rendered from `tools/og-image.html` with headless Chrome:
+
+```bash
+chrome --headless=new --hide-scrollbars --force-device-scale-factor=1 --window-size=1200,630 --virtual-time-budget=8000 --screenshot=assets/og-image.png tools/og-image.html
+```
