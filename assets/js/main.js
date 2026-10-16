@@ -18,6 +18,7 @@
   var DICT = window.I18N || { en: {}, tr: {} };
   var textNodes = $$('[data-i18n]');
   var ariaNodes = $$('[data-i18n-aria]');
+  var altNodes = $$('[data-i18n-alt]');
   var metaDesc = $('meta[name="description"]');
   var langBtn = $('#lang-toggle');
   var cvLink = $('#cv-link');
@@ -31,6 +32,7 @@
   EN['aria.lang'] = 'Türkçe\'ye geç';
   textNodes.forEach(function (el) { EN[el.dataset.i18n] = el.innerHTML; });
   ariaNodes.forEach(function (el) { EN[el.dataset.i18nAria] = el.getAttribute('aria-label'); });
+  altNodes.forEach(function (el) { EN[el.dataset.i18nAlt] = el.getAttribute('alt'); });
 
   function t(key) {
     var d = DICT[lang] || EN;
@@ -41,6 +43,7 @@
     lang = next === 'tr' ? 'tr' : 'en';
     textNodes.forEach(function (el) { el.innerHTML = t(el.dataset.i18n); });
     ariaNodes.forEach(function (el) { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+    altNodes.forEach(function (el) { el.setAttribute('alt', t(el.dataset.i18nAlt)); });
     root.lang = lang;
     document.title = t('meta.title');
     if (metaDesc) metaDesc.content = t('meta.description');

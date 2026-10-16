@@ -93,6 +93,8 @@ window.I18N = {
     'p1.b2': 'httpOnly SameSite=Strict JWT cookie\'leri, oturum iptali, brute-force rate limit, helmet/CSP ve sunucu tarafı doğrulamayla korunan 34 endpoint\'lik REST API; KVKK aydınlatma metniyle veri indirme ve hesap silme.',
     'p1.b3': 'GitHub Actions\'ta ESLint ile Node 22 ve 24 üzerinde çalışan ~300 test (170+ Jest/Supertest, 120+ Vitest/Testing Library). Frontend Vercel\'de, API MongoDB Atlas ile Render\'da.',
     'p1.ro': 'otomatik test',
+    'p1.cap': 'Vercel\'deki canlı demonun açılış sayfası',
+    'p1.alt': 'Pawfect Care açılış sayfası: kilo geçmişi olan bir evcil hayvan profil kartı, yaklaşan kuduz aşısı tekrarı ve bir kontrol randevusu.',
 
     'p2.date': 'Eyl 2026 — halen',
     'p2.kind': 'Python · ML',
@@ -101,6 +103,8 @@ window.I18N = {
     'p2.b2': 'Tahminler ve uyarı geçmişi için PostgreSQL katmanı (SQLAlchemy, Alembic) ve docker-compose; PostgreSQL entegrasyon testleri dahil 144 test CI\'da çalışıyor.',
     'p2.ro.v': '−%47,7',
     'p2.ro': 'ham CAMS\'e göre backtest MAE',
+    'p2.cap': 'Parçacık Defteri: projenin görsel tasarım dili levhası',
+    'p2.alt': 'Parçacık Defteri levhası: her istasyon için PM2,5 değerleri, 35,5 µg/m³ sınır çizgisine karşı nokta bantları olarak çizilmiş.',
 
     'p3.date': 'Eyl — Eki 2026',
     'p3.kind': 'ML · Açıklanabilirlik',
@@ -109,6 +113,8 @@ window.I18N = {
     'p3.b2': 'Docker ile konteynerleştirildi; 2 CPU / 3 GB sınırında docker stats ile bulunan oturum başına bellek artışı (3 oturumda +205 MB) giderildi ve herkese açık demo yayınlandı.',
     'p3.ro.v': '%98',
     'p3.ro': 'yakalanan dolandırıcılık tutarı',
+    'p3.cap': '“Neden alarm?” ekranı: karar ve arkasındaki üç etken',
+    'p3.alt': 'Card Fraud Detection inceleme ekranı: olasılık ve beklenen kayıpla birlikte ALARM kararı ve skoru en çok artıran üç etken.',
 
     'skills.title': '<em>Alet</em> çantası.',
     'skills.lang': 'Diller',
