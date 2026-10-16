@@ -157,12 +157,11 @@
     var run = ++pipeRun;
     pipeState = 'running';
     renderPipeResult();
-    steps.forEach(function (s) { s.className = 'step'; $('.time', s).textContent = ''; });
+    steps.forEach(function (s) { s.className = 'step'; });
 
     if (reduceMotion.matches) {
       steps.forEach(function (s) {
         s.classList.add('done');
-        $('.time', s).textContent = (s.dataset.ms / 1000).toFixed(1) + 's';
       });
       pipeState = 'done'; renderPipeResult();
       return;
@@ -177,7 +176,6 @@
         if (run !== pipeRun) return;
         s.classList.remove('running');
         s.classList.add('done');
-        $('.time', s).textContent = (ms / 1000).toFixed(1) + 's';
         next(i + 1);
       }, ms);
     })(0);

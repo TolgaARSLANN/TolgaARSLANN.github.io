@@ -83,8 +83,8 @@
   </svg>
 
   <header class="site-header">
-    <nav class="nav shell" aria-label="Primary">
-      <a class="brand" href="#top" aria-label="Tolga Arslan, home">
+    <nav class="nav shell" aria-label="Primary" data-i18n-aria="aria.nav">
+      <a class="brand" href="#top" aria-label="Tolga Arslan, home" data-i18n-aria="aria.home">
         <span class="brand-mark" aria-hidden="true">ta<span>/</span></span>
       </a>
       <ul class="nav-links">
@@ -152,18 +152,18 @@
           <div class="pipe-head">
             <div class="pipe-title mono">
               <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
-              <span>pawfect-care</span><span class="muted">/ main</span>
+              <span>PetCareApp</span><span class="muted">/ main</span>
             </div>
             <button class="pipe-rerun mono" id="pipe-rerun" type="button">
               <svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg><span data-i18n="pipe.rerun">Re-run</span>
             </button>
           </div>
           <ol class="pipe-steps mono">
-            <li class="step" data-ms="700"><span class="state" aria-hidden="true"></span><span class="name">lint</span><span class="meta">ESLint</span><span class="time"></span></li>
-            <li class="step" data-ms="1300"><span class="state" aria-hidden="true"></span><span class="name">test:api</span><span class="meta">170+ Jest · Supertest</span><span class="time"></span></li>
-            <li class="step" data-ms="1100"><span class="state" aria-hidden="true"></span><span class="name">test:ui</span><span class="meta">120+ Vitest · RTL</span><span class="time"></span></li>
-            <li class="step" data-ms="600"><span class="state" aria-hidden="true"></span><span class="name">matrix</span><span class="meta">Node 22 · 24</span><span class="time"></span></li>
-            <li class="step" data-ms="900"><span class="state" aria-hidden="true"></span><span class="name">deploy</span><span class="meta">Vercel · Render</span><span class="time"></span></li>
+            <li class="step" data-ms="700"><span class="state" aria-hidden="true"></span><span class="name">lint</span><span class="meta">ESLint</span></li>
+            <li class="step" data-ms="1300"><span class="state" aria-hidden="true"></span><span class="name">test:api</span><span class="meta">170+ Jest · Supertest</span></li>
+            <li class="step" data-ms="1100"><span class="state" aria-hidden="true"></span><span class="name">test:ui</span><span class="meta">120+ Vitest · RTL</span></li>
+            <li class="step" data-ms="600"><span class="state" aria-hidden="true"></span><span class="name">matrix</span><span class="meta">Node 22 · 24</span></li>
+            <li class="step" data-ms="900"><span class="state" aria-hidden="true"></span><span class="name">build</span><span class="meta">Vite</span></li>
           </ol>
           <figcaption class="pipe-foot mono" id="pipe-cap">
             <span class="pipe-result" id="pipe-result" data-i18n="pipe.running">Running checks…</span>
@@ -178,7 +178,7 @@
     </section>
 
     <!-- ============ MARQUEE ============ -->
-    <div class="marquee" aria-label="Tech stack">
+    <div class="marquee" aria-label="Tech stack" data-i18n-aria="aria.stack">
       <div class="marquee-track mono">
         <ul>
           <li>React</li><li>Node.js</li><li>Express</li><li>FastAPI</li><li>Python</li><li>MongoDB</li><li>PostgreSQL</li><li>Docker</li><li>GitHub Actions</li><li>Jest</li><li>Vitest</li><li>pytest</li><li>LightGBM</li><li>Vercel</li><li>Render</li>
@@ -237,7 +237,7 @@
             <span class="lang-name" data-i18n="lang.en">English</span>
             <span class="lang-level mono">B2</span>
           </div>
-          <ol class="cefr mono" aria-label="CEFR level B2">
+          <ol class="cefr mono" aria-label="CEFR level B2" data-i18n-aria="aria.cefr">
             <li class="on">A1</li><li class="on">A2</li><li class="on">B1</li><li class="on cur">B2</li><li>C1</li><li>C2</li>
           </ol>
         </article>
@@ -267,7 +267,7 @@
               <li data-i18n="p1.b2">34-endpoint REST API with httpOnly SameSite=Strict JWT cookies, session revocation, brute-force rate limiting, helmet/CSP and server-side validation; data export and account deletion with a KVKK notice.</li>
               <li data-i18n="p1.b3">~300 tests (170+ Jest/Supertest, 120+ Vitest/Testing Library) with ESLint on Node 22 and 24 in GitHub Actions. Frontend on Vercel, API on Render with MongoDB Atlas.</li>
             </ul>
-            <ul class="tags mono" aria-label="Tech stack">
+            <ul class="tags mono" aria-label="Tech stack" data-i18n-aria="aria.stack">
               <li>React</li><li>Vite</li><li>Node.js</li><li>Express</li><li>MongoDB</li><li>Jest</li><li>Vitest</li><li>GitHub Actions</li>
             </ul>
             <div class="proj-links">
@@ -275,7 +275,7 @@
               <a class="link-pill" href="https://github.com/TolgaARSLANN/PetCareApp" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span data-i18n="link.code">Source</span></a>
             </div>
           </div>
-          <aside class="readout mono" aria-label="Key numbers">
+          <aside class="readout mono" aria-label="Key numbers" data-i18n-aria="aria.numbers">
             <p class="ro-big">~300</p>
             <p class="ro-cap" data-i18n="p1.ro">automated tests</p>
             <div class="ro-term">
@@ -309,14 +309,14 @@
               <li data-i18n="p2.b1">Ingests the Ministry's SİM station data and three Open-Meteo APIs; serves forecasts through a FastAPI service with an hourly cache and a Streamlit dashboard.</li>
               <li data-i18n="p2.b2">PostgreSQL storage for forecasts and alert history (SQLAlchemy, Alembic) with docker-compose; 144 tests, including PostgreSQL integration tests, run in CI.</li>
             </ul>
-            <ul class="tags mono" aria-label="Tech stack">
+            <ul class="tags mono" aria-label="Tech stack" data-i18n-aria="aria.stack">
               <li>Python</li><li>FastAPI</li><li>PostgreSQL</li><li>Docker</li><li>Streamlit</li><li>pytest</li><li>LightGBM</li>
             </ul>
             <div class="proj-links">
               <a class="link-pill" href="https://github.com/TolgaARSLANN/havauyari" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span data-i18n="link.code">Source</span></a>
             </div>
           </div>
-          <aside class="readout mono" aria-label="Key numbers">
+          <aside class="readout mono" aria-label="Key numbers" data-i18n-aria="aria.numbers">
             <p class="ro-big" data-i18n="p2.ro.v">−47.7%</p>
             <p class="ro-cap" data-i18n="p2.ro">backtest MAE vs raw CAMS</p>
             <div class="ro-term">
@@ -350,22 +350,23 @@
               <li data-i18n="p3.b1">FastAPI service and Streamlit panel for a LightGBM model trained on 1.85M synthetic transactions (Kaggle Sparkov); a cost-based alert rule caught 98% of fraud value.</li>
               <li data-i18n="p3.b2">Containerized with Docker; found and fixed per-session memory growth (+205 MB over 3 sessions) with docker stats under a 2 CPU / 3 GB limit, then published a public demo.</li>
             </ul>
-            <ul class="tags mono" aria-label="Tech stack">
+            <ul class="tags mono" aria-label="Tech stack" data-i18n-aria="aria.stack">
               <li>Python</li><li>FastAPI</li><li>Streamlit</li><li>Docker</li><li>LightGBM</li><li>pytest</li>
             </ul>
             <div class="proj-links">
-              <a class="link-pill accent" href="https://card-fraud-detection-demo.streamlit.app" target="_blank" rel="noopener"><span data-i18n="link.demo">Live demo</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+              <a class="link-pill accent" href="https://card-fraud-detection-demo.streamlit.app" target="_blank" rel="noopener" aria-describedby="wake-note"><span data-i18n="link.demo">Live demo</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
               <a class="link-pill" href="https://github.com/TolgaARSLANN/card-fraud-detection" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span data-i18n="link.code">Source</span></a>
             </div>
+            <p class="wake-note mono" id="wake-note" data-i18n="p3.wake">Free-tier demo: if it is asleep, click “wake up” and give it a moment.</p>
           </div>
-          <aside class="readout mono" aria-label="Key numbers">
+          <aside class="readout mono" aria-label="Key numbers" data-i18n-aria="aria.numbers">
             <p class="ro-big" data-i18n="p3.ro.v">98%</p>
             <p class="ro-cap" data-i18n="p3.ro">of fraud value caught</p>
             <div class="ro-term">
               <p><span class="c-dim">model</span> LightGBM</p>
               <p><span class="c-dim">train</span> 1.85M txns</p>
               <p><span class="c-dim">explain</span> top-3 reasons</p>
-              <p><span class="c-ok">✓</span> leak fixed <span class="c-dim">+205 MB</span></p>
+              <p><span class="c-ok">✓</span> mem growth fixed <span class="c-dim">+205 MB</span></p>
               <p><span class="c-acc">→</span> docker · 2 CPU / 3 GB</p>
             </div>
           </aside>
@@ -500,7 +501,7 @@
   <footer class="site-footer">
     <div class="shell footer-inner mono">
       <p>© <span id="year">2026</span> Tolga Arslan</p>
-      <p class="muted" data-i18n="footer.built">Hand-built with HTML, CSS &amp; vanilla JS.</p>
+      <p class="muted" data-i18n="footer.built">Built with HTML, CSS &amp; vanilla JS. No frameworks.</p>
       <p class="footer-tip"><span class="muted" data-i18n="footer.tip">Tip:</span> <kbd>Ctrl</kbd> <kbd>K</kbd></p>
     </div>
   </footer>
@@ -509,10 +510,10 @@
   <dialog class="palette" id="palette" aria-label="Command menu" data-i18n-aria="aria.cmdk">
     <div class="pal-search">
       <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-      <input id="pal-input" type="text" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" placeholder="Type a command or search…" aria-label="Search commands">
+      <input id="pal-input" type="text" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" placeholder="Type a command or search…" aria-label="Search commands" data-i18n-aria="aria.palSearch">
       <kbd>esc</kbd>
     </div>
-    <ul class="pal-list" id="pal-list" role="listbox" aria-label="Commands"></ul>
+    <ul class="pal-list" id="pal-list" role="listbox" aria-label="Commands" data-i18n-aria="aria.palList"></ul>
     <div class="pal-foot mono"><span><kbd>↑</kbd><kbd>↓</kbd> <span data-i18n="pal.nav">navigate</span></span><span><kbd>↵</kbd> <span data-i18n="pal.run">select</span></span></div>
   </dialog>
 
