@@ -24,3 +24,7 @@ Then open http://localhost:8000.
 ```bash
 chrome --headless=new --hide-scrollbars --force-device-scale-factor=1 --window-size=1200,630 --virtual-time-budget=8000 --screenshot=assets/og-image.png tools/og-image.html
 ```
+
+## Cache busting
+
+GitHub Pages caches files for 10 minutes. After changing CSS or JS, bump the `?v=` value on the three asset links in `index.html` so returning visitors never mix new HTML with old scripts.
