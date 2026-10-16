@@ -137,7 +137,7 @@ window.I18N = {
     'skills.dsa': 'Veri Yapıları ve Algoritmalar',
     'skills.se': 'Yazılım Mühendisliği',
 
-    'exp.title': 'Nerelerde <em>çalıştım</em>.',
+    'exp.title': 'Bugüne kadarki <em>deneyim</em>.',
     'exp1.date': 'Tem — Ağu 2024',
     'exp1.role': 'DeepTech/AI Stajyeri',
     'exp1.org': 'Teknopark İstanbul · Roket Technology &amp; Cubeforward iş birliğiyle',
