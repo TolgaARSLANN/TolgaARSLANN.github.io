@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tolga Arslan · Full-Stack Developer</title>
   <meta name="description" content="Tolga Arslan, Full-Stack Developer (React, Node.js, Express, Python, FastAPI) based in Istanbul. Projects, experience and contact.">
   <meta name="author" content="Tolga Arslan">
-  <meta name="theme-color" content="#08090b">
+  <meta name="theme-color" content="#000000">
   <link rel="canonical" href="https://tolgaarslann.github.io/">
   <link rel="alternate" hreflang="en" href="https://tolgaarslann.github.io/?lang=en">
   <link rel="alternate" hreflang="tr" href="https://tolgaarslann.github.io/?lang=tr">
@@ -18,7 +18,7 @@
   <meta property="og:site_name" content="Tolga Arslan">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="tr_TR">
-  <meta property="og:image" content="https://tolgaarslann.github.io/assets/og-image.png">
+  <meta property="og:image" content="https://tolgaarslann.github.io/assets/og-image.png?v=2">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -26,22 +26,24 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Tolga Arslan · Full-Stack Developer">
   <meta name="twitter:description" content="React · Node.js · Express · Python · FastAPI. Projects, experience and contact.">
-  <meta name="twitter:image" content="https://tolgaarslann.github.io/assets/og-image.png">
+  <meta name="twitter:image" content="https://tolgaarslann.github.io/assets/og-image.png?v=2">
   <meta name="twitter:image:alt" content="Tolga Arslan, Full-Stack Developer in Istanbul. React, Node.js, Express, Python, FastAPI.">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261016b">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261025d">
 
   <script>
-    // Apply the saved theme before first paint.
+    // Apply the saved theme before first paint; without one, follow the system setting.
     (function () {
-      try {
-        var t = localStorage.getItem('theme');
-        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {}
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', t);
       document.documentElement.classList.add('js');
     })();
   </script>
@@ -62,9 +64,8 @@
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
-  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
-  <div class="backdrop" aria-hidden="true"><div class="grid-lines"></div><div class="spotlight"></div><div class="grain"></div></div>
 
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></symbol>
     <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
@@ -80,27 +81,25 @@
     <symbol id="i-refresh" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Zm0-9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/></symbol>
   </svg>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></symbol>
+  </svg>
 
-  <header class="site-header">
-    <nav class="nav shell" aria-label="Primary" data-i18n-aria="aria.nav">
-      <a class="brand" href="#top" aria-label="Tolga Arslan, home" data-i18n-aria="aria.home">
-        <span class="brand-mark" aria-hidden="true">ta<span>/</span></span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#about"><span class="nav-idx">01</span><span data-i18n="nav.about">About</span></a></li>
-        <li><a href="#projects"><span class="nav-idx">02</span><span data-i18n="nav.projects">Projects</span></a></li>
-        <li><a href="#skills"><span class="nav-idx">03</span><span data-i18n="nav.skills">Stack</span></a></li>
-        <li><a href="#experience"><span class="nav-idx">04</span><span data-i18n="nav.experience">Experience</span></a></li>
-        <li><a href="#contact"><span class="nav-idx">05</span><span data-i18n="nav.contact">Contact</span></a></li>
+  <!-- Global nav: thin black bar -->
+  <header class="gnav-bar">
+    <nav class="gnav wrap" aria-label="Site" data-i18n-aria="aria.site">
+      <a class="brand" href="#top" aria-label="Tolga Arslan, home" data-i18n-aria="aria.home">ta<span>/</span></a>
+      <ul class="gnav-links">
+        <li><a href="https://github.com/TolgaARSLANN" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/tolga-arslan-dev" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:tolgaarslan.dev@gmail.com">Email</a></li>
       </ul>
-      <div class="nav-actions">
-        <button class="cmdk-btn" id="cmdk-open" type="button" aria-haspopup="dialog" aria-label="Open command menu" data-i18n-aria="aria.cmdk">
+      <div class="gnav-actions">
+        <button class="gnav-btn" id="cmdk-open" type="button" aria-haspopup="dialog" aria-label="Open command menu" data-i18n-aria="aria.cmdk">
           <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-          <span class="cmdk-label" data-i18n="cmdk.btn">Jump to…</span>
           <kbd class="kbd-hint">Ctrl K</kbd>
         </button>
-        <button class="chip-btn" id="lang-toggle" type="button" aria-label="Türkçe'ye geç"><span class="lang-on">EN</span><span class="lang-sep">/</span><span class="lang-off">TR</span></button>
-        <button class="chip-btn icon-only" id="theme-toggle" type="button" aria-label="Toggle color theme" data-i18n-aria="aria.theme">
+        <button class="gnav-btn" id="lang-toggle" type="button" aria-label="Türkçe'ye geç"><span class="lang-on">EN</span><span class="lang-sep">/</span><span class="lang-off">TR</span></button>
+        <button class="gnav-btn" id="theme-toggle" type="button" aria-label="Toggle color theme" data-i18n-aria="aria.theme">
           <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
           <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
         </button>
@@ -108,399 +107,389 @@
     </nav>
   </header>
 
+  <!-- Sub-nav: frosted, sticky -->
+  <nav class="subnav" aria-label="Primary" data-i18n-aria="aria.nav">
+    <div class="subnav-inner wrap">
+      <a class="subnav-title" href="#top">Tolga Arslan</a>
+      <ul class="nav-links">
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="#skills" data-i18n="nav.skills">Stack</a></li>
+        <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+      </ul>
+      <a class="btn btn-primary btn-sm" href="#contact" data-i18n="nav.contact">Contact</a>
+    </div>
+  </nav>
+
   <main id="main">
     <!-- ============ HERO ============ -->
-    <section class="hero shell" id="top">
-      <div class="hero-status mono" data-reveal>
-        <span class="pulse" aria-hidden="true"></span>
-        <span data-i18n="hero.status">Full-Stack Developer</span>
-        <span class="sep" aria-hidden="true">/</span>
-        <span data-i18n="hero.city">Istanbul</span>
-        <time class="clock" id="clock" aria-label="Local time in Istanbul">--:--</time>
-        <span class="tz">UTC+3</span>
-      </div>
-
-      <h1 class="hero-title" aria-label="Tolga Arslan">
-        <span class="line"><span class="line-inner">Tolga</span></span>
-        <span class="line line-2"><span class="line-inner">Arslan<span class="dot">.</span></span></span>
-      </h1>
-
-      <div class="hero-grid">
-        <div class="hero-intro" data-reveal>
-          <p class="hero-lead" data-i18n="hero.lead">Computer engineer building <em>full-stack</em> web apps: React on the front, Node.js or FastAPI on the back. <em>Secured, tested</em> and shipped through CI.</p>
-
-          <p class="terminal-line mono" aria-hidden="true">
-            <span class="prompt">~/tolga</span><span class="dollar">$</span>
-            <span id="typer"></span><span class="caret"></span>
-          </p>
-
-          <div class="hero-cta">
-            <a class="btn btn-accent" href="#projects" data-magnetic>
-              <span data-i18n="hero.cta.projects">Selected work</span>
-              <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg>
-            </a>
-            <a class="btn btn-line" id="cv-link" href="assets/cv/Tolga_Arslan_CV_EN.pdf" download data-magnetic>
-              <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
-              <span data-i18n="hero.cta.cv">Download CV</span>
-            </a>
-          </div>
+    <section class="tile tile-light hero" id="top">
+      <div class="wrap center">
+        <p class="eyebrow" data-reveal>
+          <span class="status-dot" aria-hidden="true"></span>
+          <span data-i18n="hero.status">Full-Stack Developer</span>
+          <span aria-hidden="true">·</span>
+          <span data-i18n="hero.city">Istanbul</span>
+          <time class="clock" id="clock" aria-label="Local time in Istanbul">--:--</time>
+        </p>
+        <h1 class="hero-title" data-reveal>Tolga Arslan.</h1>
+        <p class="hero-tagline gradient-text" data-reveal data-i18n="hero.tagline">Built. Tested. Shipped.</p>
+        <p class="hero-lead" data-reveal data-i18n="hero.lead">Computer engineer building <em>full-stack</em> web apps: React on the front, Node.js or FastAPI on the back. <em>Secured, tested</em> and shipped through CI.</p>
+        <div class="cta-row" data-reveal>
+          <a class="btn btn-primary" href="#projects" data-i18n="hero.cta.projects">Selected work</a>
+          <a class="btn btn-secondary" id="cv-link" href="assets/cv/Tolga_Arslan_CV_EN.pdf" download><span data-i18n="hero.cta.cv">Download CV</span></a>
         </div>
 
-        <!-- CI pipeline widget: facts from the Pawfect Care project -->
+        <!-- CI pipeline widget, presented as a macOS window: facts from the Pawfect Care project -->
         <figure class="pipeline" id="pipeline" data-reveal aria-labelledby="pipe-cap">
           <div class="pipe-head">
-            <div class="pipe-title mono">
+            <span class="traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+            <div class="pipe-title">
               <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
               <span>PetCareApp</span><span class="muted">/ main</span>
             </div>
-            <button class="pipe-rerun mono" id="pipe-rerun" type="button">
+            <button class="pipe-rerun" id="pipe-rerun" type="button">
               <svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg><span data-i18n="pipe.rerun">Re-run</span>
             </button>
           </div>
-          <ol class="pipe-steps mono">
+          <ol class="pipe-steps">
             <li class="step" data-ms="700"><span class="state" aria-hidden="true"></span><span class="name">lint</span><span class="meta">ESLint</span></li>
             <li class="step" data-ms="1300"><span class="state" aria-hidden="true"></span><span class="name">test:api</span><span class="meta">170+ Jest · Supertest</span></li>
             <li class="step" data-ms="1100"><span class="state" aria-hidden="true"></span><span class="name">test:ui</span><span class="meta">120+ Vitest · RTL</span></li>
             <li class="step" data-ms="600"><span class="state" aria-hidden="true"></span><span class="name">matrix</span><span class="meta">Node 22 · 24</span></li>
             <li class="step" data-ms="900"><span class="state" aria-hidden="true"></span><span class="name">build</span><span class="meta">Vite</span></li>
           </ol>
-          <figcaption class="pipe-foot mono" id="pipe-cap">
+          <figcaption class="pipe-foot" id="pipe-cap">
             <span class="pipe-result" id="pipe-result" data-i18n="pipe.running">Running checks…</span>
             <span class="muted">GitHub Actions</span>
           </figcaption>
         </figure>
       </div>
-
-      <a class="scroll-cue mono" href="#about" aria-label="Scroll to About" data-i18n-aria="aria.scroll">
-        <span data-i18n="hero.scroll">scroll</span><span class="scroll-line" aria-hidden="true"></span>
-      </a>
     </section>
 
-    <!-- ============ MARQUEE ============ -->
-    <div class="marquee" aria-label="Tech stack" data-i18n-aria="aria.stack">
-      <div class="marquee-track mono">
-        <ul>
-          <li>React</li><li>Node.js</li><li>Express</li><li>FastAPI</li><li>Python</li><li>MongoDB</li><li>PostgreSQL</li><li>Docker</li><li>GitHub Actions</li><li>Jest</li><li>Vitest</li><li>pytest</li><li>LightGBM</li><li>Vercel</li><li>Render</li>
-        </ul>
-        <ul aria-hidden="true">
-          <li>React</li><li>Node.js</li><li>Express</li><li>FastAPI</li><li>Python</li><li>MongoDB</li><li>PostgreSQL</li><li>Docker</li><li>GitHub Actions</li><li>Jest</li><li>Vitest</li><li>pytest</li><li>LightGBM</li><li>Vercel</li><li>Render</li>
-        </ul>
-      </div>
-    </div>
+    <!-- ============ ABOUT: highlights bento ============ -->
+    <section class="tile tile-parchment" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <p class="eyebrow" data-i18n="nav.about">About</p>
+          <h2 id="about-title" data-i18n="about.title">Engineer by training, <em>builder</em> by habit.</h2>
+        </header>
 
-    <!-- ============ ABOUT (bento) ============ -->
-    <section class="section shell" id="about" aria-labelledby="about-title">
-      <header class="sec-head" data-reveal>
-        <p class="sec-idx mono">01 — <span data-i18n="nav.about">About</span></p>
-        <h2 id="about-title" data-i18n="about.title">Engineer by training, <em>builder</em> by habit.</h2>
-      </header>
+        <div class="bento">
+          <article class="card card-intro" data-reveal>
+            <p class="lead-airy" data-i18n="about.p1">I'm a Computer Engineering graduate from an <em>English-taught</em> program. I develop React frontends and Node.js/Express or FastAPI backends, secure them with cookie-based sessions, rate limiting and validation, cover them with automated tests and ship them through GitHub Actions to Vercel and Render.</p>
+            <p class="body-muted" data-i18n="about.p2">Before that I interned in Agile teams at ArVis (Teknopark Istanbul) and VBT Yazılım. Lately I've also been building data and ML services in Python.</p>
+          </article>
 
-      <div class="bento">
-        <article class="tile tile-summary" data-reveal data-spot>
-          <p class="tile-label mono" data-i18n="about.label">profile.md</p>
-          <p class="summary" data-i18n="about.p1">I'm a Computer Engineering graduate from an <em>English-taught</em> program. I develop React frontends and Node.js/Express or FastAPI backends, secure them with cookie-based sessions, rate limiting and validation, cover them with automated tests and ship them through GitHub Actions to Vercel and Render.</p>
-          <p class="summary-2" data-i18n="about.p2">Before that I interned in Agile teams at ArVis (Teknopark Istanbul) and VBT Yazılım. Lately I've also been building data and ML services in Python.</p>
-        </article>
+          <article class="card card-dark stat stat-hero" data-reveal>
+            <p class="stat-num gradient-text"><span data-count="300" data-fmt-en="~{n}" data-fmt-tr="~{n}">~300</span></p>
+            <p class="stat-label" data-i18n="stat.tests">automated tests in Pawfect Care</p>
+          </article>
+          <article class="card stat" data-reveal>
+            <p class="stat-num"><span data-count="34" data-fmt-en="{n}" data-fmt-tr="{n}">34</span></p>
+            <p class="stat-label" data-i18n="stat.endpoints">REST endpoints behind JWT cookies &amp; rate limits</p>
+          </article>
+          <article class="card stat" data-reveal>
+            <p class="stat-num"><span data-count="47.7" data-decimals="1" data-fmt-en="−{n}%" data-fmt-tr="−%{n}">−47.7%</span></p>
+            <p class="stat-label" data-i18n="stat.mae">forecast error (MAE) vs raw CAMS in HavaUyarı</p>
+          </article>
+          <article class="card stat" data-reveal>
+            <p class="stat-num"><span data-count="98" data-fmt-en="{n}%" data-fmt-tr="%{n}">98%</span></p>
+            <p class="stat-label" data-i18n="stat.fraud">of fraud value caught by a cost-based alert rule</p>
+          </article>
 
-        <article class="tile tile-stat" data-reveal data-spot>
-          <p class="stat-num"><span data-count="300" data-fmt-en="~{n}" data-fmt-tr="~{n}">~300</span></p>
-          <p class="stat-label" data-i18n="stat.tests">automated tests in Pawfect Care</p>
-        </article>
-        <article class="tile tile-stat" data-reveal data-spot>
-          <p class="stat-num"><span data-count="34" data-fmt-en="{n}" data-fmt-tr="{n}">34</span></p>
-          <p class="stat-label" data-i18n="stat.endpoints">REST endpoints behind JWT cookies &amp; rate limits</p>
-        </article>
-        <article class="tile tile-stat" data-reveal data-spot>
-          <p class="stat-num"><span data-count="47.7" data-decimals="1" data-fmt-en="−{n}%" data-fmt-tr="−%{n}">−47.7%</span></p>
-          <p class="stat-label" data-i18n="stat.mae">forecast error (MAE) vs raw CAMS in HavaUyarı</p>
-        </article>
-        <article class="tile tile-stat" data-reveal data-spot>
-          <p class="stat-num"><span data-count="98" data-fmt-en="{n}%" data-fmt-tr="%{n}">98%</span></p>
-          <p class="stat-label" data-i18n="stat.fraud">of fraud value caught by a cost-based alert rule</p>
-        </article>
-
-        <article class="tile tile-edu" data-reveal data-spot>
-          <p class="tile-label mono" data-i18n="edu.label">education</p>
-          <h3 data-i18n="edu.school">Bandırma Onyedi Eylül University</h3>
-          <p class="muted" data-i18n="edu.degree">B.Sc. Computer Engineering · English-taught</p>
-          <p class="tile-date mono" data-i18n="edu.date">Sept 2020 — Feb 2025</p>
-        </article>
-
-        <article class="tile tile-lang" data-reveal data-spot>
-          <p class="tile-label mono" data-i18n="lang.label">languages</p>
-          <div class="lang-row">
-            <span class="lang-name" data-i18n="lang.tr">Turkish</span>
-            <span class="lang-level mono" data-i18n="lang.native">Native</span>
-          </div>
-          <div class="lang-row">
-            <span class="lang-name" data-i18n="lang.en">English</span>
-            <span class="lang-level mono">B2</span>
-          </div>
-          <ol class="cefr mono" aria-label="CEFR level B2" data-i18n-aria="aria.cefr">
-            <li class="on">A1</li><li class="on">A2</li><li class="on">B1</li><li class="on cur">B2</li><li>C1</li><li>C2</li>
-          </ol>
-        </article>
+          <article class="card card-edu" data-reveal>
+            <p class="card-label" data-i18n="edu.label">Education</p>
+            <h3 class="card-title" data-i18n="edu.school">Bandırma Onyedi Eylül University</h3>
+            <p class="body-muted" data-i18n="edu.degree">B.Sc. Computer Engineering · English-taught</p>
+            <p class="caption muted" data-i18n="edu.date">Sept 2020 — Feb 2025</p>
+          </article>
+          <article class="card card-lang" data-reveal>
+            <p class="card-label" data-i18n="lang.label">Languages</p>
+            <div class="lang-row">
+              <span class="lang-name" data-i18n="lang.tr">Turkish</span>
+              <span class="lang-level" data-i18n="lang.native">Native</span>
+            </div>
+            <div class="lang-row">
+              <span class="lang-name" data-i18n="lang.en">English</span>
+              <span class="lang-level">B2</span>
+            </div>
+            <ol class="cefr" aria-label="CEFR level B2" data-i18n-aria="aria.cefr">
+              <li class="on">A1</li><li class="on">A2</li><li class="on">B1</li><li class="on cur">B2</li><li>C1</li><li>C2</li>
+            </ol>
+          </article>
+        </div>
       </div>
     </section>
 
     <!-- ============ PROJECTS ============ -->
-    <section class="section shell" id="projects" aria-labelledby="projects-title">
-      <header class="sec-head" data-reveal>
-        <p class="sec-idx mono">02 — <span data-i18n="nav.projects">Projects</span></p>
-        <h2 id="projects-title" data-i18n="projects.title">Selected <em>work</em>.</h2>
+    <section id="projects" aria-labelledby="projects-title">
+      <header class="tile tile-light tile-head">
+        <div class="wrap center" data-reveal>
+          <p class="eyebrow" data-i18n="nav.projects">Projects</p>
+          <h2 id="projects-title" data-i18n="projects.title">Selected <em>work</em>.</h2>
+        </div>
       </header>
 
-      <div class="projects">
-        <!-- Pawfect Care -->
-        <article class="project" data-reveal data-spot>
-          <div class="proj-meta mono">
-            <span class="proj-idx">01</span>
-            <span data-i18n="p1.date">Feb 2025 — now</span>
-            <span class="proj-kind" data-i18n="p1.kind">Capstone · extended 2026</span>
-          </div>
-          <div class="proj-body">
+      <!-- Pawfect Care -->
+      <article class="tile tile-dark project">
+        <div class="wrap">
+          <div class="proj-head center" data-reveal>
+            <p class="eyebrow"><span data-i18n="p1.kind">Capstone · extended 2026</span> · <span data-i18n="p1.date">Feb 2025 — now</span></p>
             <h3 class="proj-title">Pawfect Care</h3>
             <p class="proj-sub" data-i18n="p1.sub">A pet care platform for health records, vaccines, medications and vet visits, plus a community blog.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="https://pawfect-care-inky.vercel.app" target="_blank" rel="noopener"><span data-i18n="link.demo">Live demo</span></a>
+              <a class="btn btn-secondary" href="https://github.com/TolgaARSLANN/PetCareApp" target="_blank" rel="noopener"><span data-i18n="link.code">Source</span></a>
+            </div>
+          </div>
+          <figure class="device">
+            <a class="device-screen" href="https://pawfect-care-inky.vercel.app" target="_blank" rel="noopener">
+              <span class="frame-bar" aria-hidden="true"><span class="frame-dots"><i></i><i></i><i></i></span><span class="frame-url">pawfect-care-inky.vercel.app</span></span>
+              <img src="assets/img/projects/pawfect-800.webp" srcset="assets/img/projects/pawfect-800.webp 800w, assets/img/projects/pawfect-1600.webp 1600w" sizes="(max-width: 1068px) calc(100vw - 64px), 920px" width="1600" height="1000" loading="lazy" decoding="async" alt="Pawfect Care landing page: a pet profile card with weight history, an upcoming rabies booster and a check-up appointment." data-i18n-alt="p1.alt">
+            </a>
+            <span class="device-base" aria-hidden="true"></span>
+            <figcaption data-i18n="p1.cap">Landing page of the live demo on Vercel</figcaption>
+          </figure>
+          <div class="specs" data-reveal>
+            <div class="spec-num" aria-label="Key numbers" data-i18n-aria="aria.numbers">
+              <p class="ro-big gradient-text">~300</p>
+              <p class="ro-cap" data-i18n="p1.ro">automated tests</p>
+            </div>
             <ul class="proj-points">
               <li data-i18n="p1.b1">Vaccine tracking with overdue and upcoming booster alerts, weight trends and appointments. Lazy-loaded React routes, light/dark themes, accessible forms.</li>
               <li data-i18n="p1.b2">34-endpoint REST API with httpOnly SameSite=Strict JWT cookies, session revocation, brute-force rate limiting, helmet/CSP and server-side validation; data export and account deletion with a KVKK notice.</li>
               <li data-i18n="p1.b3">~300 tests (170+ Jest/Supertest, 120+ Vitest/Testing Library) with ESLint on Node 22 and 24 in GitHub Actions. Frontend on Vercel, API on Render with MongoDB Atlas.</li>
             </ul>
-            <ul class="tags mono" aria-label="Tech stack" data-i18n-aria="aria.stack">
+            <ul class="tags" aria-label="Tech stack" data-i18n-aria="aria.stack">
               <li>React</li><li>Vite</li><li>Node.js</li><li>Express</li><li>MongoDB</li><li>Jest</li><li>Vitest</li><li>GitHub Actions</li>
             </ul>
-            <div class="proj-links">
-              <a class="link-pill accent" href="https://pawfect-care-inky.vercel.app" target="_blank" rel="noopener"><span data-i18n="link.demo">Live demo</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-              <a class="link-pill" href="https://github.com/TolgaARSLANN/PetCareApp" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span data-i18n="link.code">Source</span></a>
-            </div>
           </div>
-          <aside class="readout mono" aria-label="Key numbers" data-i18n-aria="aria.numbers">
-            <p class="ro-big">~300</p>
-            <p class="ro-cap" data-i18n="p1.ro">automated tests</p>
-            <div class="ro-term">
-              <p><span class="c-dim">$</span> npm test</p>
-              <p><span class="c-ok">✓</span> api&nbsp;&nbsp;&nbsp;170+ <span class="c-dim">jest</span></p>
-              <p><span class="c-ok">✓</span> ui&nbsp;&nbsp;&nbsp;&nbsp;120+ <span class="c-dim">vitest</span></p>
-              <p><span class="c-ok">✓</span> node&nbsp;&nbsp;22 · 24</p>
-              <p><span class="c-acc">→</span> vercel + render</p>
-            </div>
-          </aside>
-          <figure class="proj-media">
-            <a class="frame" href="https://pawfect-care-inky.vercel.app" target="_blank" rel="noopener">
-              <span class="frame-bar mono" aria-hidden="true"><span class="frame-dots"><i></i><i></i><i></i></span><span class="frame-url">pawfect-care-inky.vercel.app</span></span>
-              <span class="shot"><img src="assets/img/projects/pawfect-800.webp" srcset="assets/img/projects/pawfect-800.webp 800w, assets/img/projects/pawfect-1600.webp 1600w" sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1100px) 90vw, 1040px" width="1600" height="1000" loading="lazy" decoding="async" alt="Pawfect Care landing page: a pet profile card with weight history, an upcoming rabies booster and a check-up appointment." data-i18n-alt="p1.alt"></span>
-            </a>
-            <figcaption class="mono" data-i18n="p1.cap">Landing page of the live demo on Vercel</figcaption>
-          </figure>
-        </article>
+        </div>
+      </article>
 
-        <!-- HavaUyarı -->
-        <article class="project" data-reveal data-spot>
-          <div class="proj-meta mono">
-            <span class="proj-idx">02</span>
-            <span data-i18n="p2.date">Sept 2026 — now</span>
-            <span class="proj-kind" data-i18n="p2.kind">Python · ML</span>
-          </div>
-          <div class="proj-body">
+      <!-- HavaUyarı -->
+      <article class="tile tile-light project">
+        <div class="wrap">
+          <div class="proj-head center" data-reveal>
+            <p class="eyebrow"><span data-i18n="p2.kind">Python · ML</span> · <span data-i18n="p2.date">Sept 2026 — now</span></p>
             <h3 class="proj-title">HavaUyarı</h3>
             <p class="proj-sub" data-i18n="p2.sub">An air quality early warning system: 24-hour PM2.5 forecasts and alerts for 8 stations in 5 cities.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="https://github.com/TolgaARSLANN/havauyari" target="_blank" rel="noopener"><span data-i18n="link.code">Source</span></a>
+            </div>
+          </div>
+          <figure class="device">
+            <a class="device-screen" href="https://github.com/TolgaARSLANN/havauyari/blob/main/docs/tasarim/parcacik-defteri.png" target="_blank" rel="noopener">
+              <span class="frame-bar" aria-hidden="true"><span class="frame-dots"><i></i><i></i><i></i></span><span class="frame-url">github.com/TolgaARSLANN/havauyari</span></span>
+              <img src="assets/img/projects/havauyari-800.webp" srcset="assets/img/projects/havauyari-800.webp 800w, assets/img/projects/havauyari-1600.webp 1600w" sizes="(max-width: 1068px) calc(100vw - 64px), 920px" width="1600" height="1000" loading="lazy" decoding="async" alt="Parçacık Defteri plate: PM2.5 values drawn as dot bands for each station against a 35.5 µg/m³ limit line." data-i18n-alt="p2.alt">
+            </a>
+            <span class="device-base" aria-hidden="true"></span>
+            <figcaption data-i18n="p2.cap">Parçacık Defteri: the project’s visual design-language plate</figcaption>
+          </figure>
+          <div class="specs" data-reveal>
+            <div class="spec-num" aria-label="Key numbers" data-i18n-aria="aria.numbers">
+              <p class="ro-big gradient-text" data-i18n="p2.ro.v">−47.7%</p>
+              <p class="ro-cap" data-i18n="p2.ro">backtest MAE vs raw CAMS</p>
+            </div>
             <ul class="proj-points">
               <li data-i18n="p2.b1">Ingests the Ministry's SİM station data and three Open-Meteo APIs; serves forecasts through a FastAPI service with an hourly cache and a Streamlit dashboard.</li>
               <li data-i18n="p2.b2">PostgreSQL storage for forecasts and alert history (SQLAlchemy, Alembic) with docker-compose; 144 tests, including PostgreSQL integration tests, run in CI.</li>
             </ul>
-            <ul class="tags mono" aria-label="Tech stack" data-i18n-aria="aria.stack">
+            <ul class="tags" aria-label="Tech stack" data-i18n-aria="aria.stack">
               <li>Python</li><li>FastAPI</li><li>PostgreSQL</li><li>Docker</li><li>Streamlit</li><li>pytest</li><li>LightGBM</li>
             </ul>
-            <div class="proj-links">
-              <a class="link-pill" href="https://github.com/TolgaARSLANN/havauyari" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span data-i18n="link.code">Source</span></a>
-            </div>
           </div>
-          <aside class="readout mono" aria-label="Key numbers" data-i18n-aria="aria.numbers">
-            <p class="ro-big" data-i18n="p2.ro.v">−47.7%</p>
-            <p class="ro-cap" data-i18n="p2.ro">backtest MAE vs raw CAMS</p>
-            <div class="ro-term">
-              <p><span class="c-dim">$</span> pytest -q</p>
-              <p><span class="c-ok">✓</span> 144 passed</p>
-              <p><span class="c-dim">stations</span> 8 <span class="c-dim">· cities</span> 5</p>
-              <p><span class="c-dim">horizon</span> 24h PM2.5</p>
-              <p><span class="c-acc">→</span> fastapi + streamlit</p>
-            </div>
-          </aside>
-          <figure class="proj-media">
-            <a class="frame" href="https://github.com/TolgaARSLANN/havauyari/blob/main/docs/tasarim/parcacik-defteri.png" target="_blank" rel="noopener">
-              <span class="frame-bar mono" aria-hidden="true"><span class="frame-dots"><i></i><i></i><i></i></span><span class="frame-url">github.com/TolgaARSLANN/havauyari</span></span>
-              <span class="shot"><img src="assets/img/projects/havauyari-800.webp" srcset="assets/img/projects/havauyari-800.webp 800w, assets/img/projects/havauyari-1600.webp 1600w" sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1100px) 90vw, 1040px" width="1600" height="1000" loading="lazy" decoding="async" alt="Parçacık Defteri plate: PM2.5 values drawn as dot bands for each station against a 35.5 µg/m³ limit line." data-i18n-alt="p2.alt"></span>
-            </a>
-            <figcaption class="mono" data-i18n="p2.cap">Parçacık Defteri: the project’s visual design-language plate</figcaption>
-          </figure>
-        </article>
+        </div>
+      </article>
 
-        <!-- Card Fraud Detection -->
-        <article class="project" data-reveal data-spot>
-          <div class="proj-meta mono">
-            <span class="proj-idx">03</span>
-            <span data-i18n="p3.date">Sept — Oct 2026</span>
-            <span class="proj-kind" data-i18n="p3.kind">ML · Explainability</span>
-          </div>
-          <div class="proj-body">
+      <!-- Card Fraud Detection -->
+      <article class="tile tile-dark project">
+        <div class="wrap">
+          <div class="proj-head center" data-reveal>
+            <p class="eyebrow"><span data-i18n="p3.kind">ML · Explainability</span> · <span data-i18n="p3.date">Sept — Oct 2026</span></p>
             <h3 class="proj-title">Card Fraud Detection</h3>
             <p class="proj-sub" data-i18n="p3.sub">A scoring service that returns a decision and its top 3 reasons for every transaction.</p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="https://card-fraud-detection-demo.streamlit.app" target="_blank" rel="noopener" aria-describedby="wake-note"><span data-i18n="link.demo">Live demo</span></a>
+              <a class="btn btn-secondary" href="https://github.com/TolgaARSLANN/card-fraud-detection" target="_blank" rel="noopener"><span data-i18n="link.code">Source</span></a>
+            </div>
+            <p class="wake-note" id="wake-note" data-i18n="p3.wake">Free-tier demo: if it is asleep, click “wake up” and give it a moment.</p>
+          </div>
+          <figure class="device">
+            <a class="device-screen" href="https://card-fraud-detection-demo.streamlit.app" target="_blank" rel="noopener">
+              <span class="frame-bar" aria-hidden="true"><span class="frame-dots"><i></i><i></i><i></i></span><span class="frame-url">card-fraud-detection-demo.streamlit.app</span></span>
+              <img src="assets/img/projects/fraud-800.webp" srcset="assets/img/projects/fraud-800.webp 800w, assets/img/projects/fraud-1600.webp 1600w" sizes="(max-width: 1068px) calc(100vw - 64px), 920px" width="1600" height="1000" loading="lazy" decoding="async" alt="Card Fraud Detection review screen: an ALARM decision with probability and expected loss, and the three factors that raised the score." data-i18n-alt="p3.alt">
+            </a>
+            <span class="device-base" aria-hidden="true"></span>
+            <figcaption data-i18n="p3.cap">“Why the alarm?” screen: the decision and the three factors behind it</figcaption>
+          </figure>
+          <div class="specs" data-reveal>
+            <div class="spec-num" aria-label="Key numbers" data-i18n-aria="aria.numbers">
+              <p class="ro-big gradient-text" data-i18n="p3.ro.v">98%</p>
+              <p class="ro-cap" data-i18n="p3.ro">of fraud value caught</p>
+            </div>
             <ul class="proj-points">
               <li data-i18n="p3.b1">FastAPI service and Streamlit panel for a LightGBM model trained on 1.85M synthetic transactions (Kaggle Sparkov); a cost-based alert rule caught 98% of fraud value.</li>
               <li data-i18n="p3.b2">Containerized with Docker; found and fixed per-session memory growth (+205 MB over 3 sessions) with docker stats under a 2 CPU / 3 GB limit, then published a public demo.</li>
             </ul>
-            <ul class="tags mono" aria-label="Tech stack" data-i18n-aria="aria.stack">
+            <ul class="tags" aria-label="Tech stack" data-i18n-aria="aria.stack">
               <li>Python</li><li>FastAPI</li><li>Streamlit</li><li>Docker</li><li>LightGBM</li><li>pytest</li>
             </ul>
-            <div class="proj-links">
-              <a class="link-pill accent" href="https://card-fraud-detection-demo.streamlit.app" target="_blank" rel="noopener" aria-describedby="wake-note"><span data-i18n="link.demo">Live demo</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-              <a class="link-pill" href="https://github.com/TolgaARSLANN/card-fraud-detection" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span data-i18n="link.code">Source</span></a>
-            </div>
-            <p class="wake-note mono" id="wake-note" data-i18n="p3.wake">Free-tier demo: if it is asleep, click “wake up” and give it a moment.</p>
           </div>
-          <aside class="readout mono" aria-label="Key numbers" data-i18n-aria="aria.numbers">
-            <p class="ro-big" data-i18n="p3.ro.v">98%</p>
-            <p class="ro-cap" data-i18n="p3.ro">of fraud value caught</p>
-            <div class="ro-term">
-              <p><span class="c-dim">model</span> LightGBM</p>
-              <p><span class="c-dim">train</span> 1.85M txns</p>
-              <p><span class="c-dim">explain</span> top-3 reasons</p>
-              <p><span class="c-ok">✓</span> mem growth fixed <span class="c-dim">+205 MB</span></p>
-              <p><span class="c-acc">→</span> docker · 2 CPU / 3 GB</p>
-            </div>
-          </aside>
-          <figure class="proj-media">
-            <a class="frame" href="https://card-fraud-detection-demo.streamlit.app" target="_blank" rel="noopener">
-              <span class="frame-bar mono" aria-hidden="true"><span class="frame-dots"><i></i><i></i><i></i></span><span class="frame-url">card-fraud-detection-demo.streamlit.app</span></span>
-              <span class="shot"><img src="assets/img/projects/fraud-800.webp" srcset="assets/img/projects/fraud-800.webp 800w, assets/img/projects/fraud-1600.webp 1600w" sizes="(max-width: 760px) calc(100vw - 32px), (max-width: 1100px) 90vw, 1040px" width="1600" height="1000" loading="lazy" decoding="async" alt="Card Fraud Detection review screen: an ALARM decision with probability and expected loss, and the three factors that raised the score." data-i18n-alt="p3.alt"></span>
-            </a>
-            <figcaption class="mono" data-i18n="p3.cap">“Why the alarm?” screen: the decision and the three factors behind it</figcaption>
-          </figure>
-        </article>
-      </div>
-
-      <a class="more-link mono" href="https://github.com/TolgaARSLANN" target="_blank" rel="noopener">
-        <span data-i18n="projects.more">More on GitHub</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
-      </a>
+          <p class="center more">
+            <a class="text-link" href="https://github.com/TolgaARSLANN" target="_blank" rel="noopener"><span data-i18n="projects.more">More on GitHub</span><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+          </p>
+        </div>
+      </article>
     </section>
 
     <!-- ============ STACK ============ -->
-    <section class="section shell" id="skills" aria-labelledby="skills-title">
-      <header class="sec-head" data-reveal>
-        <p class="sec-idx mono">03 — <span data-i18n="nav.skills">Stack</span></p>
-        <h2 id="skills-title" data-i18n="skills.title">The <em>toolbox</em>.</h2>
-      </header>
+    <section class="tile tile-parchment" id="skills" aria-labelledby="skills-title">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <p class="eyebrow" data-i18n="nav.skills">Stack</p>
+          <h2 id="skills-title" data-i18n="skills.title">The <em>toolbox</em>.</h2>
+        </header>
 
-      <dl class="stack">
-        <div class="stack-row" data-reveal>
-          <dt class="mono" data-i18n="skills.lang">Languages</dt>
-          <dd><ul><li>JavaScript</li><li>Python</li><li>SQL</li><li data-i18n="skills.csharp">C# (basic)</li></ul></dd>
-        </div>
-        <div class="stack-row" data-reveal>
-          <dt class="mono">Frontend</dt>
-          <dd><ul><li>React 18</li><li>Vite</li><li>React Router</li><li>Axios</li><li>HTML</li><li data-i18n="skills.css">CSS (responsive, accessible)</li><li>Streamlit</li></ul></dd>
-        </div>
-        <div class="stack-row" data-reveal>
-          <dt class="mono">Backend</dt>
-          <dd><ul><li>Node.js</li><li>Express.js</li><li>FastAPI</li><li data-i18n="skills.rest">REST API design</li><li>JWT / bcrypt</li><li>Mongoose</li></ul></dd>
-        </div>
-        <div class="stack-row" data-reveal>
-          <dt class="mono" data-i18n="skills.db">Databases</dt>
-          <dd><ul><li>MongoDB Atlas</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>Alembic</li><li>SQL Server</li></ul></dd>
-        </div>
-        <div class="stack-row" data-reveal>
-          <dt class="mono" data-i18n="skills.devops">Testing / DevOps</dt>
-          <dd><ul><li>Jest</li><li>Supertest</li><li>Vitest</li><li>React Testing Library</li><li>pytest</li><li>ESLint</li><li>GitHub Actions</li><li>Docker</li><li>Vercel</li><li>Render</li></ul></dd>
-        </div>
-        <div class="stack-row" data-reveal>
-          <dt class="mono" data-i18n="skills.ml">Data / ML</dt>
-          <dd><ul><li>Pandas</li><li>scikit-learn</li><li>LightGBM</li><li>SHAP</li></ul></dd>
-        </div>
-        <div class="stack-row" data-reveal>
-          <dt class="mono" data-i18n="skills.fund">Fundamentals</dt>
-          <dd><ul><li data-i18n="skills.oop">Object-Oriented Programming</li><li data-i18n="skills.dsa">Data Structures &amp; Algorithms</li><li data-i18n="skills.se">Software Engineering</li><li>Agile</li></ul></dd>
-        </div>
-      </dl>
+        <dl class="stack">
+          <div class="card stack-card" data-reveal>
+            <dt data-i18n="skills.lang">Languages</dt>
+            <dd><ul><li>JavaScript</li><li>Python</li><li>SQL</li><li data-i18n="skills.csharp">C# (basic)</li></ul></dd>
+          </div>
+          <div class="card stack-card" data-reveal>
+            <dt>Frontend</dt>
+            <dd><ul><li>React 18</li><li>Vite</li><li>React Router</li><li>Axios</li><li>HTML</li><li data-i18n="skills.css">CSS (responsive, accessible)</li><li>Streamlit</li></ul></dd>
+          </div>
+          <div class="card stack-card" data-reveal>
+            <dt>Backend</dt>
+            <dd><ul><li>Node.js</li><li>Express.js</li><li>FastAPI</li><li data-i18n="skills.rest">REST API design</li><li>JWT / bcrypt</li><li>Mongoose</li></ul></dd>
+          </div>
+          <div class="card stack-card" data-reveal>
+            <dt data-i18n="skills.db">Databases</dt>
+            <dd><ul><li>MongoDB Atlas</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>Alembic</li><li>SQL Server</li></ul></dd>
+          </div>
+          <div class="card stack-card" data-reveal>
+            <dt data-i18n="skills.devops">Testing / DevOps</dt>
+            <dd><ul><li>Jest</li><li>Supertest</li><li>Vitest</li><li>React Testing Library</li><li>pytest</li><li>ESLint</li><li>GitHub Actions</li><li>Docker</li><li>Vercel</li><li>Render</li></ul></dd>
+          </div>
+          <div class="card stack-card" data-reveal>
+            <dt data-i18n="skills.ml">Data / ML</dt>
+            <dd><ul><li>Pandas</li><li>scikit-learn</li><li>LightGBM</li><li>SHAP</li></ul></dd>
+          </div>
+          <div class="card stack-card stack-wide" data-reveal>
+            <dt data-i18n="skills.fund">Fundamentals</dt>
+            <dd><ul><li data-i18n="skills.oop">Object-Oriented Programming</li><li data-i18n="skills.dsa">Data Structures &amp; Algorithms</li><li data-i18n="skills.se">Software Engineering</li><li>Agile</li></ul></dd>
+          </div>
+        </dl>
+      </div>
     </section>
 
     <!-- ============ EXPERIENCE ============ -->
-    <section class="section shell" id="experience" aria-labelledby="exp-title">
-      <header class="sec-head" data-reveal>
-        <p class="sec-idx mono">04 — <span data-i18n="nav.experience">Experience</span></p>
-        <h2 id="exp-title" data-i18n="exp.title">Experience, <em>so far</em>.</h2>
-      </header>
+    <section class="tile tile-light" id="experience" aria-labelledby="exp-title">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <p class="eyebrow" data-i18n="nav.experience">Experience</p>
+          <h2 id="exp-title" data-i18n="exp.title">Experience, <em>so far</em>.</h2>
+        </header>
 
-      <ol class="log">
-        <li class="log-item" data-reveal>
-          <div class="log-date mono" data-i18n="exp1.date">Jul — Aug 2024</div>
-          <div class="log-node" aria-hidden="true"></div>
-          <div class="log-body">
-            <h3><span data-i18n="exp1.role">DeepTech/AI Intern</span> <span class="at">@ ArVis</span></h3>
-            <p class="log-org mono" data-i18n="exp1.org">Teknopark Istanbul · with Roket Technology &amp; Cubeforward</p>
-            <ul class="proj-points">
-              <li data-i18n="exp1.b1">Prepared training data for the CNN-based model of “Neurovisionist”, an AI-powered early Alzheimer's diagnosis project, in a 16-person R&amp;D team; cleaned and preprocessed data to improve model accuracy.</li>
-              <li data-i18n="exp1.b2">Built cognitive-exercise mini apps targeting memory functions over 6 weeks of Agile sprints.</li>
-            </ul>
-          </div>
-        </li>
-        <li class="log-item" data-reveal>
-          <div class="log-date mono" data-i18n="exp2.date">Jul — Aug 2023</div>
-          <div class="log-node" aria-hidden="true"></div>
-          <div class="log-body">
-            <h3><span data-i18n="exp2.role">Software Intern</span> <span class="at">@ VBT Yazılım</span></h3>
-            <p class="log-org mono">VBT Yazılım A.Ş.</p>
-            <ul class="proj-points">
-              <li data-i18n="exp2.b1">Trained in web UI (HTML, CSS, JavaScript, Angular) and mobile (Flutter) development; learned ITSM/ITIL processes.</li>
-              <li data-i18n="exp2.b2">Hands-on work with C#, .NET Core and SQL Server, with version control in Git.</li>
-            </ul>
-          </div>
-        </li>
-        <li class="log-item log-minor" data-reveal>
-          <div class="log-date mono" data-i18n="exp3.date">Dec 2025 — May 2026</div>
-          <div class="log-node" aria-hidden="true"></div>
-          <div class="log-body">
-            <h3 data-i18n="exp3.role">Compulsory military service</h3>
-            <p class="log-org mono" data-i18n="exp3.org">Completed</p>
-          </div>
-        </li>
-      </ol>
+        <div class="exp-grid">
+          <ol class="log">
+            <li class="log-item" data-reveal>
+              <p class="log-date" data-i18n="exp1.date">Jul — Aug 2024</p>
+              <div class="log-body">
+                <h3><span data-i18n="exp1.role">DeepTech/AI Intern</span> <span class="at">· ArVis</span></h3>
+                <p class="log-org" data-i18n="exp1.org">Teknopark Istanbul · with Roket Technology &amp; Cubeforward</p>
+                <ul class="proj-points">
+                  <li data-i18n="exp1.b1">Prepared training data for the CNN-based model of “Neurovisionist”, an AI-powered early Alzheimer's diagnosis project, in a 16-person R&amp;D team; cleaned and preprocessed data to improve model accuracy.</li>
+                  <li data-i18n="exp1.b2">Built cognitive-exercise mini apps targeting memory functions over 6 weeks of Agile sprints.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="log-item" data-reveal>
+              <p class="log-date" data-i18n="exp2.date">Jul — Aug 2023</p>
+              <div class="log-body">
+                <h3><span data-i18n="exp2.role">Software Intern</span> <span class="at">· VBT Yazılım</span></h3>
+                <p class="log-org">VBT Yazılım A.Ş.</p>
+                <ul class="proj-points">
+                  <li data-i18n="exp2.b1">Trained in web UI (HTML, CSS, JavaScript, Angular) and mobile (Flutter) development; learned ITSM/ITIL processes.</li>
+                  <li data-i18n="exp2.b2">Hands-on work with C#, .NET Core and SQL Server, with version control in Git.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="log-item log-minor" data-reveal>
+              <p class="log-date" data-i18n="exp3.date">Dec 2025 — May 2026</p>
+              <div class="log-body">
+                <h3 data-i18n="exp3.role">Compulsory military service</h3>
+                <p class="log-org" data-i18n="exp3.org">Completed</p>
+              </div>
+            </li>
+          </ol>
 
-      <div class="certs" data-reveal>
-        <p class="tile-label mono" data-i18n="cert.title">certifications</p>
-        <ul>
-          <li><span class="mono c-idx">01</span><span data-i18n="cert.1">ArVis DeepTech/AI 2024 Internship · Certificate of Achievement</span></li>
-          <li><span class="mono c-idx">02</span><span>İş Bankası ProSchool Data &amp; AI Class <span class="muted">(Toptalent.co)</span></span></li>
-          <li><span class="mono c-idx">03</span><span data-i18n="cert.3">SQL Server Database Programming <span class="muted">(Udemy)</span></span></li>
-          <li><span class="mono c-idx">04</span><span data-i18n="cert.4">Flutter App Development <span class="muted">(Google Digital Garage)</span></span></li>
-        </ul>
+          <aside class="card certs" data-reveal>
+            <p class="card-label" data-i18n="cert.title">Certifications</p>
+            <ul>
+              <li data-i18n="cert.1">ArVis DeepTech/AI 2024 Internship · Certificate of Achievement</li>
+              <li>İş Bankası ProSchool Data &amp; AI Class <span class="muted">(Toptalent.co)</span></li>
+              <li data-i18n="cert.3">SQL Server Database Programming <span class="muted">(Udemy)</span></li>
+              <li data-i18n="cert.4">Flutter App Development <span class="muted">(Google Digital Garage)</span></li>
+            </ul>
+          </aside>
+        </div>
       </div>
     </section>
 
     <!-- ============ CONTACT ============ -->
-    <section class="section shell contact" id="contact" aria-labelledby="contact-title">
-      <p class="sec-idx mono" data-reveal>05 — <span data-i18n="nav.contact">Contact</span></p>
-      <h2 class="contact-title" id="contact-title" data-reveal data-i18n="contact.title">Let's build <em>something</em>.</h2>
-      <p class="contact-lead" data-reveal data-i18n="contact.lead">Have a role or a project in mind? Email is the fastest way to reach me.</p>
-
-      <div class="mail-row" data-reveal>
-        <a class="mail-big" href="mailto:tolgaarslan.dev@gmail.com">tolgaarslan.dev<wbr>@gmail.com</a>
-        <button class="copy-btn mono" id="copy-email" type="button">
-          <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg><span data-i18n="contact.copy">Copy</span>
-        </button>
+    <section class="tile tile-dark contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap center">
+        <p class="eyebrow" data-reveal data-i18n="nav.contact">Contact</p>
+        <h2 class="contact-title" id="contact-title" data-reveal data-i18n="contact.title">Let's build <em>something</em>.</h2>
+        <p class="proj-sub" data-reveal data-i18n="contact.lead">Have a role or a project in mind? Email is the fastest way to reach me.</p>
+        <p class="mail-row" data-reveal>
+          <a class="mail-big" href="mailto:tolgaarslan.dev@gmail.com">tolgaarslan.dev<wbr>@gmail.com</a>
+        </p>
+        <div class="cta-row" data-reveal>
+          <a class="btn btn-primary" href="mailto:tolgaarslan.dev@gmail.com"><span data-i18n="contact.write">Write an email</span></a>
+          <button class="btn btn-secondary" id="copy-email" type="button"><span data-i18n="contact.copy">Copy address</span></button>
+        </div>
       </div>
-
-      <ul class="contact-links" data-reveal>
-        <li><a href="https://linkedin.com/in/tolga-arslan-dev" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg><span>LinkedIn</span><svg class="icon arr" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a></li>
-        <li><a href="https://github.com/TolgaARSLANN" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span>GitHub</span><svg class="icon arr" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a></li>
-      </ul>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="shell footer-inner mono">
-      <p>© <span id="year">2026</span> Tolga Arslan</p>
-      <p class="muted" data-i18n="footer.built">Built with HTML, CSS &amp; vanilla JS. No frameworks.</p>
-      <p class="footer-tip"><span class="muted" data-i18n="footer.tip">Tip:</span> <kbd>Ctrl</kbd> <kbd>K</kbd></p>
+    <div class="wrap">
+      <div class="footer-cols">
+        <div>
+          <p class="footer-head" data-i18n="footer.sections">Sections</p>
+          <ul>
+            <li><a href="#about" data-i18n="nav.about">About</a></li>
+            <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="#skills" data-i18n="nav.skills">Stack</a></li>
+            <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-head" data-i18n="nav.projects">Projects</p>
+          <ul>
+            <li><a href="https://pawfect-care-inky.vercel.app" target="_blank" rel="noopener">Pawfect Care</a></li>
+            <li><a href="https://github.com/TolgaARSLANN/havauyari" target="_blank" rel="noopener">HavaUyarı</a></li>
+            <li><a href="https://card-fraud-detection-demo.streamlit.app" target="_blank" rel="noopener">Card Fraud Detection</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-head" data-i18n="footer.connect">Connect</p>
+          <ul>
+            <li><a href="https://github.com/TolgaARSLANN" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://linkedin.com/in/tolga-arslan-dev" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="mailto:tolgaarslan.dev@gmail.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>© <span id="year">2026</span> Tolga Arslan</p>
+        <p data-i18n="footer.built">Built with HTML, CSS &amp; vanilla JS. No frameworks.</p>
+        <p class="footer-tip"><span data-i18n="footer.tip">Tip:</span> <kbd>Ctrl</kbd> <kbd>K</kbd></p>
+      </div>
     </div>
   </footer>
 
@@ -512,12 +501,12 @@
       <kbd>esc</kbd>
     </div>
     <ul class="pal-list" id="pal-list" role="listbox" aria-label="Commands" data-i18n-aria="aria.palList"></ul>
-    <div class="pal-foot mono"><span><kbd>↑</kbd><kbd>↓</kbd> <span data-i18n="pal.nav">navigate</span></span><span><kbd>↵</kbd> <span data-i18n="pal.run">select</span></span></div>
+    <div class="pal-foot"><span><kbd>↑</kbd><kbd>↓</kbd> <span data-i18n="pal.nav">navigate</span></span><span><kbd>↵</kbd> <span data-i18n="pal.run">select</span></span></div>
   </dialog>
 
-  <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/js/i18n.js?v=20261016b"></script>
-  <script src="assets/js/main.js?v=20261016b"></script>
+  <script src="assets/js/i18n.js?v=20261025d"></script>
+  <script src="assets/js/main.js?v=20261025d"></script>
 </body>
 </html>

@@ -9,7 +9,6 @@
     set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   };
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   var isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
 
   /* =====================================================
@@ -65,15 +64,22 @@
   langBtn.addEventListener('click', function () { setLang(lang === 'tr' ? 'en' : 'tr'); });
 
   /* =====================================================
-     Theme (dark by default)
+     Theme (follows the system until the visitor picks one)
      ===================================================== */
   function toggleTheme() {
-    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
-    $('meta[name="theme-color"]').content = next === 'light' ? '#f2f1ec' : '#08090b';
     store.set('theme', next);
   }
   $('#theme-toggle').addEventListener('click', toggleTheme);
+
+  var systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  function followSystem() {
+    var saved = store.get('theme');
+    if (saved !== 'light' && saved !== 'dark') root.setAttribute('data-theme', systemDark.matches ? 'dark' : 'light');
+  }
+  if (systemDark.addEventListener) systemDark.addEventListener('change', followSystem);
+  else if (systemDark.addListener) systemDark.addListener(followSystem);
 
   /* =====================================================
      Toast
@@ -118,25 +124,6 @@
   tick();
   setInterval(tick, 15000);
   langListeners.push(function () { clockEl.setAttribute('aria-label', t('js.clock')); });
-
-  /* =====================================================
-     Terminal typer
-     ===================================================== */
-  var typerEl = $('#typer');
-  var cmds = ['npm run test', 'pytest -q', 'docker compose up -d', 'git push origin main'];
-  if (reduceMotion.matches) {
-    typerEl.textContent = cmds[0];
-  } else {
-    (function typeLoop(i, pos, deleting) {
-      var word = cmds[i % cmds.length];
-      typerEl.textContent = word.slice(0, pos);
-      var delay = deleting ? 32 : 70 + Math.random() * 60;
-      if (!deleting && pos === word.length) { delay = 1800; deleting = true; }
-      else if (deleting && pos === 0) { deleting = false; i++; delay = 380; }
-      else pos += deleting ? -1 : 1;
-      setTimeout(function () { typeLoop(i, pos, deleting); }, delay);
-    })(0, 0, false);
-  }
 
   /* =====================================================
      CI pipeline widget
@@ -230,52 +217,17 @@
         io.unobserve(el);
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    $$('[data-reveal]').forEach(function (el) { io.observe(el); });
+    $$('[data-reveal], .device').forEach(function (el) { io.observe(el); });
   } else {
-    $$('[data-reveal]').forEach(function (el) { el.classList.add('in'); });
+    $$('[data-reveal], .device').forEach(function (el) { el.classList.add('in'); });
     runPipeline();
     counters.forEach(countUp);
   }
 
   /* =====================================================
-     Pointer effects: ambient spotlight, card spotlight, magnetic buttons
+     Sub-nav state, active section
      ===================================================== */
-  if (finePointer.matches && !reduceMotion.matches) {
-    var spot = $('.spotlight');
-    var raf = 0, mx = 0, my = 0;
-    window.addEventListener('pointermove', function (e) {
-      mx = e.clientX; my = e.clientY;
-      if (!raf) raf = requestAnimationFrame(function () {
-        spot.style.setProperty('--mx', mx + 'px');
-        spot.style.setProperty('--my', my + 'px');
-        raf = 0;
-      });
-    }, { passive: true });
-
-    $$('[data-spot]').forEach(function (el) {
-      el.addEventListener('pointermove', function (e) {
-        var r = el.getBoundingClientRect();
-        el.style.setProperty('--x', (e.clientX - r.left) + 'px');
-        el.style.setProperty('--y', (e.clientY - r.top) + 'px');
-      });
-    });
-
-    $$('[data-magnetic]').forEach(function (el) {
-      el.addEventListener('pointermove', function (e) {
-        var r = el.getBoundingClientRect();
-        var x = (e.clientX - r.left - r.width / 2) * 0.18;
-        var y = (e.clientY - r.top - r.height / 2) * 0.28;
-        el.style.transform = 'translate(' + x + 'px,' + y + 'px)';
-      });
-      el.addEventListener('pointerleave', function () { el.style.transform = ''; });
-    });
-  }
-
-  /* =====================================================
-     Header state, progress bar, active section
-     ===================================================== */
-  var header = $('.site-header');
-  var bar = $('#progress-bar');
+  var header = $('.subnav');
   var navLinks = $$('.nav-links a');
   var sections = navLinks.map(function (a) { return $(a.getAttribute('href')); });
   var scrollRaf = 0;
@@ -284,8 +236,7 @@
     scrollRaf = 0;
     var y = window.scrollY;
     var max = document.documentElement.scrollHeight - window.innerHeight;
-    header.classList.toggle('scrolled', y > 12);
-    bar.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
+    header.classList.toggle('scrolled', header.getBoundingClientRect().top <= 0 && y > 0);
     var probe = y + window.innerHeight * 0.4;
     var active = -1;
     sections.forEach(function (s, i) { if (s && s.offsetTop <= probe) active = i; });
@@ -328,7 +279,7 @@
       { group: go, icon: 'i-arrow-down', label: t('nav.contact'), hint: '05', run: function () { scrollToId('contact'); } },
       { group: t('js.pal.actions'), icon: 'i-copy', label: t('js.pal.copy'), hint: EMAIL, run: copyEmail },
       { group: t('js.pal.actions'), icon: 'i-download', label: t('js.pal.cv'), hint: lang.toUpperCase(), run: function () { cvLink.click(); } },
-      { group: t('js.pal.actions'), icon: root.getAttribute('data-theme') === 'light' ? 'i-moon' : 'i-sun', label: t('js.pal.theme'), run: toggleTheme },
+      { group: t('js.pal.actions'), icon: root.getAttribute('data-theme') === 'dark' ? 'i-sun' : 'i-moon', label: t('js.pal.theme'), run: toggleTheme },
       { group: t('js.pal.actions'), icon: 'i-search', label: t('js.pal.lang'), hint: lang === 'tr' ? 'EN' : 'TR', run: function () { setLang(lang === 'tr' ? 'en' : 'tr'); } },
       { group: t('js.pal.links'), icon: 'i-github', label: 'GitHub', hint: 'TolgaARSLANN', run: function () { openUrl('https://github.com/TolgaARSLANN'); } },
       { group: t('js.pal.links'), icon: 'i-linkedin', label: 'LinkedIn', hint: 'tolga-arslan-dev', run: function () { openUrl('https://linkedin.com/in/tolga-arslan-dev'); } },
@@ -433,12 +384,6 @@
      Boot
      ===================================================== */
   setLang(initialLang());
-  $('meta[name="theme-color"]').content = root.getAttribute('data-theme') === 'light' ? '#f2f1ec' : '#08090b';
   $('#year').textContent = new Date().getFullYear();
   onScroll();
-
-  var fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-  Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 800); })]).then(function () {
-    setTimeout(function () { root.classList.add('loaded'); }, 30);
-  });
 })();
