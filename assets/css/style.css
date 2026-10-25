@@ -139,6 +139,9 @@ kbd {
 ::selection { background: color-mix(in srgb, var(--primary) 25%, transparent); }
 :focus-visible { outline: 2px solid var(--primary-focus); outline-offset: 3px; border-radius: var(--r-sm); }
 
+/* Theme switch: the script clips the new snapshot into a growing circle. */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+
 .icon { width: 16px; height: 16px; flex: none; }
 .muted { color: var(--s-fg-3, var(--ink-muted-48)); }
 .caption { font-size: 14px; line-height: 1.43; letter-spacing: -0.224px; }
@@ -279,6 +282,18 @@ h2 em { color: var(--s-fg-3); }
   font-family: var(--font-display);
   font-size: 112px; font-weight: 600; line-height: 1.0; letter-spacing: -0.03em;
 }
+/* beyond spec: the name assembles letter by letter out of a blur (split by the script),
+   and the rest of the hero follows once it has landed. */
+.hero-title .w { display: inline-block; white-space: nowrap; }
+html.js .hero-title[data-reveal] { opacity: 1; transform: none; transition: none; }
+html.js .hero-title .ch { display: inline-block; opacity: 0; filter: blur(14px); transform: translateY(.2em) scale(1.06); }
+html.js .hero-title.in .ch { animation: char-in 1s var(--ease-out) forwards; animation-delay: calc(var(--i) * 45ms); }
+@keyframes char-in { to { opacity: 1; filter: blur(0); transform: none; } }
+html.js .hero .hero-tagline[data-reveal] { transition-delay: 520ms; }
+html.js .hero .hero-lead[data-reveal] { transition-delay: 640ms; }
+html.js .hero .cta-row[data-reveal] { transition-delay: 760ms; }
+html.js .hero .pipeline[data-reveal] { transition-delay: 880ms; }
+
 .hero-tagline {
   margin: var(--sp-xs) auto 0;
   font-family: var(--font-display);
@@ -359,6 +374,33 @@ h2 em { color: var(--s-fg-3); }
 .pipe-result.ok { color: #1a7f37; }
 :root[data-theme="dark"] .pipe-result.ok { color: var(--status); }
 
+/* beyond spec: an "intelligence" glow ring traces the window while checks run,
+   then settles to green and fades once they pass. */
+@property --glow-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.pipeline::before {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  border-radius: inherit;
+  /* No bottom edge: the window sits flush on the hero's lower boundary. */
+  padding: 1.5px 1.5px 0;
+  background: conic-gradient(from var(--glow-angle), #2997ff, #a98bff, #ff6fa0, #ffb35c, #2997ff);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+}
+html.js .pipeline[data-reveal] { transition: opacity var(--t-slow) var(--ease-out), transform var(--t-slow) var(--ease-out), box-shadow .8s var(--ease); }
+.pipeline.is-running::before { opacity: 1; animation: glow-spin 2.4s linear infinite; }
+.pipeline.is-running { box-shadow: 0 -10px 60px -20px rgba(0, 0, 0, 0.25), 0 0 70px -18px rgba(150, 110, 255, 0.55); }
+.pipeline.is-done::before { background: var(--status); animation: glow-settle 2.2s var(--ease) forwards; }
+.pipeline.is-done { animation: glow-halo 2.2s var(--ease) forwards; }
+@keyframes glow-spin { to { --glow-angle: 360deg; } }
+@keyframes glow-settle { 0% { opacity: 1; } 55% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes glow-halo {
+  0% { box-shadow: 0 -10px 60px -20px rgba(0, 0, 0, 0.25), 0 0 70px -18px rgba(48, 209, 88, 0.6); }
+  100% { box-shadow: 0 -10px 60px -20px rgba(0, 0, 0, 0.25), 0 0 70px -18px rgba(48, 209, 88, 0); }
+}
+
 /* =========================================================
    Cards & bento
    ========================================================= */
@@ -399,6 +441,30 @@ h2 em { color: var(--s-fg-3); }
 .stat-label { font-size: 14px; line-height: 1.43; letter-spacing: -0.224px; color: var(--s-fg-2); max-width: 24ch; }
 .stat-hero .stat-label { font-size: 17px; letter-spacing: -0.374px; }
 .card-edu, .card-lang { grid-column: span 3; }
+
+/* beyond spec: a soft light follows the pointer across the bento. The hovered card's surface
+   lights up; every card's edge catches the light near the cursor, neighbours included. */
+@media (hover: hover) and (pointer: fine) {
+  .bento .card { position: relative; isolation: isolate; }
+  .bento .card::before, .bento .card::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    opacity: 0; transition: opacity .35s var(--ease);
+  }
+  .bento .card::before {
+    z-index: -1;
+    background: radial-gradient(480px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--primary) 13%, transparent), transparent 62%);
+  }
+  .bento .card::after {
+    padding: 1px;
+    background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--primary) 60%, transparent), transparent 70%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  }
+  .bento .card-dark::before { background: radial-gradient(480px circle at var(--mx, 50%) var(--my, 50%), rgba(169, 139, 255, .16), transparent 62%); }
+  .bento .card-dark::after { background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), rgba(169, 139, 255, .8), transparent 70%); }
+  .bento:hover .card::after, .bento .card:hover::before { opacity: 1; }
+}
 .lang-row { display: flex; justify-content: space-between; align-items: baseline; gap: var(--sp-sm); padding: var(--sp-sm) 0; border-bottom: 1px solid var(--s-line); }
 .lang-row:first-of-type { margin-top: var(--sp-xs); }
 .lang-name { font-weight: 600; }
@@ -490,12 +556,36 @@ h2 em { color: var(--s-fg-3); }
 }
 .more { margin-top: 72px; }
 
-/* Scroll-driven entrance for devices (beyond spec), with a reveal fallback. */
+/* Scroll-driven entrance for devices (beyond spec): the laptop rises into place while its lid
+   opens on the hinge and the screen brightens. Browsers without scroll timelines get the same
+   motion once, as a transition when the device scrolls into view. */
+.device-screen { transform-origin: 50% 100%; }
+/* While the lid is tilted toward the viewer its top edge widens past the column;
+   the full-bleed project tile clips that sideways spill at the viewport edge. */
+.project { overflow-x: clip; }
 html.js .device { opacity: 0; transform: translateY(40px) scale(.94); transition: opacity var(--t-slow) var(--ease-out), transform var(--t-slow) var(--ease-out); }
+html.js .device .device-screen {
+  transform: perspective(1800px) rotateX(-62deg); filter: brightness(.45);
+  transition: transform 1.4s var(--ease-out) .15s, filter 1.4s var(--ease-out) .15s;
+}
 html.js .device.in { opacity: 1; transform: none; }
+html.js .device.in .device-screen { transform: perspective(1800px) rotateX(0deg); filter: none; }
 @supports (animation-timeline: view()) {
-  html.js .device { opacity: 1; transform: none; transition: none; animation: device-in linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
-  @keyframes device-in { from { opacity: .3; transform: translateY(60px) scale(.86); } to { opacity: 1; transform: none; } }
+  html.js .device {
+    opacity: 1; transform: none; transition: none;
+    view-timeline-name: --device;
+    animation: device-in linear both; animation-timeline: --device; animation-range: entry 0% cover 35%;
+  }
+  html.js .device .device-screen,
+  html.js .device.in .device-screen {
+    transition: none;
+    animation: lid-open linear both; animation-timeline: --device; animation-range: entry 10% cover 45%;
+  }
+  @keyframes device-in { from { opacity: .3; transform: translateY(60px) scale(.9); } to { opacity: 1; transform: none; } }
+  @keyframes lid-open {
+    from { transform: perspective(1800px) rotateX(-62deg); filter: brightness(.45); }
+    to { transform: perspective(1800px) rotateX(0deg); filter: none; }
+  }
 }
 
 /* =========================================================
@@ -689,10 +779,10 @@ html.js [data-reveal].in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-  html.js [data-reveal], html.js .device { opacity: 1; transform: none; animation: none; }
+  html.js [data-reveal], html.js .device, html.js .device .device-screen { opacity: 1; transform: none; filter: none; animation: none; }
 }
 @media print {
   .gnav-bar, .subnav, .pipeline, .cta-row, .palette, .toast, .hero::before { display: none !important; }
-  html.js [data-reveal], html.js .device { opacity: 1; transform: none; }
+  html.js [data-reveal], html.js .device, html.js .device .device-screen { opacity: 1; transform: none; filter: none; }
   .tile, .contact { background: #fff !important; color: #000 !important; padding-block: 24px; }
 }

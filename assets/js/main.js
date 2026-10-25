@@ -68,8 +68,22 @@
      ===================================================== */
   function toggleTheme() {
     var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    store.set('theme', next);
+    function apply() {
+      root.setAttribute('data-theme', next);
+      store.set('theme', next);
+    }
+    if (!document.startViewTransition || reduceMotion.matches) { apply(); return; }
+
+    // The new theme spreads out as a circle from the toggle button.
+    var r = $('#theme-toggle').getBoundingClientRect();
+    var x = r.left + r.width / 2, y = r.top + r.height / 2;
+    var radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    document.startViewTransition(apply).ready.then(function () {
+      root.animate(
+        { clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + radius + 'px at ' + x + 'px ' + y + 'px)'] },
+        { duration: 650, easing: 'cubic-bezier(.65, 0, .35, 1)', pseudoElement: '::view-transition-new(root)' }
+      );
+    });
   }
   $('#theme-toggle').addEventListener('click', toggleTheme);
 
@@ -140,6 +154,12 @@
   }
   langListeners.push(renderPipeResult);
 
+  // The window's glow ring follows the run: spinning while checks run, green once they pass.
+  function setPipeGlow(state) {
+    pipe.classList.toggle('is-running', state === 'running');
+    pipe.classList.toggle('is-done', state === 'done');
+  }
+
   function runPipeline() {
     var run = ++pipeRun;
     pipeState = 'running';
@@ -153,9 +173,10 @@
       pipeState = 'done'; renderPipeResult();
       return;
     }
+    setPipeGlow('running');
     (function next(i) {
       if (run !== pipeRun) return;
-      if (i >= steps.length) { pipeState = 'done'; renderPipeResult(); return; }
+      if (i >= steps.length) { pipeState = 'done'; renderPipeResult(); setPipeGlow('done'); return; }
       var s = steps[i];
       var ms = +s.dataset.ms;
       s.classList.add('running');
@@ -197,6 +218,28 @@
   });
 
   /* =====================================================
+     Hero title: letters sharpen out of a blur, one by one
+     ===================================================== */
+  var heroTitle = $('.hero-title');
+  if (heroTitle && !reduceMotion.matches) {
+    var titleText = heroTitle.textContent.trim();
+    var charIndex = 0;
+    heroTitle.setAttribute('aria-label', titleText);
+    heroTitle.innerHTML = titleText.split(' ').map(function (word) {
+      var chars = word.split('').map(function (ch) {
+        return '<span class="ch" style="--i:' + (charIndex++) + '">' + ch + '</span>';
+      }).join('');
+      return '<span class="w" aria-hidden="true">' + chars + '</span>';
+    }).join(' ');
+    // Once the last letter lands, put the plain text back so kerning is exactly as before.
+    var allChars = $$('.ch', heroTitle);
+    allChars[allChars.length - 1].addEventListener('animationend', function () {
+      heroTitle.textContent = titleText;
+      heroTitle.removeAttribute('aria-label');
+    });
+  }
+
+  /* =====================================================
      Reveal on scroll (+ triggers for pipeline & counters)
      ===================================================== */
   // Stagger siblings that reveal together.
@@ -222,6 +265,27 @@
     $$('[data-reveal], .device').forEach(function (el) { el.classList.add('in'); });
     runPipeline();
     counters.forEach(countUp);
+  }
+
+  /* =====================================================
+     Bento spotlight: every card learns where the pointer is
+     ===================================================== */
+  var bento = $('.bento');
+  if (bento && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var bentoCards = $$('.card', bento);
+    var spotRaf = 0, px = 0, py = 0;
+    bento.addEventListener('pointermove', function (e) {
+      px = e.clientX; py = e.clientY;
+      if (spotRaf) return;
+      spotRaf = requestAnimationFrame(function () {
+        spotRaf = 0;
+        bentoCards.forEach(function (c) {
+          var r = c.getBoundingClientRect();
+          c.style.setProperty('--mx', (px - r.left) + 'px');
+          c.style.setProperty('--my', (py - r.top) + 'px');
+        });
+      });
+    }, { passive: true });
   }
 
   /* =====================================================
