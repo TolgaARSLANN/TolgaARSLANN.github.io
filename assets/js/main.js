@@ -111,8 +111,26 @@
      Copy email
      ===================================================== */
   var EMAIL = 'tolgaarslan.dev@gmail.com';
-  function copyEmail() {
-    var done = function () { toast(t('js.copied')); };
+  var copyBtn = $('#copy-email');
+  var copyLabel = $('.copy-label', copyBtn);
+  var copyTimer;
+  // The button answers for itself (green pill, drawn check, "Copied"); the palette, which closes
+  // before the copy lands, still reports through the toast.
+  function showCopied() {
+    clearTimeout(copyTimer);
+    copyBtn.style.minWidth = copyBtn.offsetWidth + 'px';
+    copyBtn.classList.remove('copied');
+    void copyBtn.offsetWidth;
+    copyBtn.classList.add('copied');
+    copyLabel.textContent = t('js.copiedShort');
+    copyTimer = setTimeout(function () {
+      copyBtn.classList.remove('copied');
+      copyLabel.innerHTML = t('contact.copy');
+      copyBtn.style.minWidth = '';
+    }, 2200);
+  }
+  function copyEmail(fromButton) {
+    var done = function () { if (fromButton === true) showCopied(); else toast(t('js.copied')); };
     var fail = function () {
       var r = document.createRange();
       r.selectNodeContents($('.mail-big'));
@@ -122,7 +140,7 @@
     if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(EMAIL).then(done, fail);
     else fail();
   }
-  $('#copy-email').addEventListener('click', copyEmail);
+  copyBtn.addEventListener('click', function () { copyEmail(true); });
 
   /* =====================================================
      Istanbul clock
