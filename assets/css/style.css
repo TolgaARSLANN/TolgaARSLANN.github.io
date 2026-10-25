@@ -227,8 +227,19 @@ h2 em { color: var(--s-fg-3); }
   font-size: 21px; font-weight: 600; line-height: 1.19; letter-spacing: 0.231px;
   color: var(--ink); white-space: nowrap;
 }
-.nav-links { display: flex; gap: var(--sp-lg); margin-left: auto; }
-.nav-links a { font-size: 12px; letter-spacing: -0.12px; color: var(--ink); opacity: .8; transition: opacity var(--t-fast), color var(--t-fast); }
+.nav-links { position: relative; isolation: isolate; display: flex; gap: 0; margin-left: auto; }
+.nav-links a { display: block; padding: 6px 12px; border-radius: var(--r-pill); font-size: 12px; letter-spacing: -0.12px; color: var(--ink); opacity: .8; transition: opacity var(--t-fast), color var(--t-fast); }
+/* A pill slides behind the active section's link (positioned by the script). */
+.nav-ind {
+  position: absolute; z-index: -1; left: 0; top: 50%; height: 26px; margin-top: -13px; width: 0;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  opacity: 0;
+  transition: transform .5s var(--ease-out), width .5s var(--ease-out), opacity .3s var(--ease);
+  pointer-events: none;
+}
+.nav-ind.on { opacity: 1; }
+.nav-ind.instant { transition: opacity .3s var(--ease); }
 .nav-links a:hover { opacity: 1; }
 .nav-links a.active { opacity: 1; color: var(--primary); }
 
@@ -438,6 +449,23 @@ html.js .pipeline[data-reveal] { transition: opacity var(--t-slow) var(--ease-ou
   font-variant-numeric: tabular-nums;
 }
 .stat-hero .stat-num { font-size: 96px; }
+
+/* beyond spec: numbers land like an odometer, reel by reel (built by the script). */
+.odometer { display: inline-flex; line-height: 1; }
+.odo, .odo-sym { display: inline-block; height: 1em; line-height: 1; }
+.odo { overflow: hidden; }
+.odo-reel { display: block; transform: translateY(0); transition: transform 2s cubic-bezier(.16, 1, .3, 1); transition-delay: calc(var(--o) * 110ms); }
+.odo-reel > span { display: block; height: 1em; }
+.rolling .odo-reel { transform: translateY(calc(var(--n) * -1em)); }
+/* Text-clipped gradients don't reach glyphs inside moving reels, so each glyph paints its own
+   slice: the gradient is stretched to the whole number's width and shifted to the glyph's slot. */
+.gradient-text .odometer > *, .gradient-text .odo-reel > span {
+  background: var(--s-grad, var(--gradient));
+  background-size: calc(var(--c) * 100%) 100%;
+  background-position: calc(var(--k) / max(var(--c) - 1, 1) * 100%) 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.gradient-text .odometer > .odo { background: none; }
 .stat-label { font-size: 14px; line-height: 1.43; letter-spacing: -0.224px; color: var(--s-fg-2); max-width: 24ch; }
 .stat-hero .stat-label { font-size: 17px; letter-spacing: -0.374px; }
 .card-edu, .card-lang { grid-column: span 3; }
@@ -503,6 +531,21 @@ html.js .pipeline[data-reveal] { transition: opacity var(--t-slow) var(--ease-ou
   overflow: hidden;
 }
 .device-screen > * { border-radius: 6px 6px 0 0; }
+
+/* beyond spec: glass. A faint fixed sheen sits on the screen; on hover a brighter band of
+   light sweeps across it, the way a reflection moves on a real display. */
+.device-screen { position: relative; }
+.device-screen::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.22) 48%, rgba(255, 255, 255, 0.06) 54%, transparent 62%) 100% 0 / 260% 100% no-repeat,
+    linear-gradient(160deg, rgba(255, 255, 255, 0.07) 0%, transparent 38%);
+  transition: background-position 0s;
+}
+@media (hover: hover) and (pointer: fine) {
+  .device-screen:hover::after { background-position: 0% 0, 0 0; transition: background-position 1.3s cubic-bezier(.3, .7, .2, 1); }
+}
 .frame-bar {
   display: grid; grid-template-columns: 56px minmax(0, 1fr) 56px; align-items: center;
   height: 30px; padding: 0 12px;
@@ -645,6 +688,7 @@ html.js .device.in .device-screen { transform: perspective(1800px) rotateX(0deg)
 .footer-cols a { color: var(--ink-muted-80); }
 .footer-cols a:hover { text-decoration: underline; }
 .footer-legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--sp-sm) var(--sp-lg); padding-top: var(--sp-md); color: var(--ink-muted-48); }
+
 
 /* =========================================================
    Command palette

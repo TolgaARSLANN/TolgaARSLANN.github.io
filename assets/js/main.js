@@ -201,20 +201,33 @@
     }).format(value);
     return (el.dataset['fmt' + (lang === 'tr' ? 'Tr' : 'En')] || '{n}').replace('{n}', n);
   }
+  // Odometer: each digit is a reel of 0–9 (twice, for a longer spin) that rolls to its value,
+  // left to right; signs and separators stay put. Screen readers get the final value.
+  var REEL = '0123456789'.repeat(2).split('').map(function (d) { return '<span>' + d + '</span>'; }).join('');
   function countUp(el) {
-    var target = +el.dataset.count;
+    var text = formatCount(el, +el.dataset.count);
     el.dataset.done = '1';
-    if (reduceMotion.matches) { el.textContent = formatCount(el, target); return; }
-    var start = performance.now(), dur = 1400;
-    (function frame(now) {
-      var p = Math.min((now - start) / dur, 1);
-      var eased = 1 - Math.pow(1 - p, 4);
-      el.textContent = formatCount(el, target * eased);
-      if (p < 1) requestAnimationFrame(frame);
-    })(start);
+    if (reduceMotion.matches) { el.textContent = text; return; }
+    var reel = 0;
+    var chars = text.split('');
+    el.setAttribute('aria-label', text);
+    el.classList.add('odometer');
+    // --k / --c tell each glyph which slice of a gradient fill it owns (see .gradient-text .odometer).
+    el.innerHTML = chars.map(function (ch, k) {
+      var pos = '--k:' + k + ';--c:' + chars.length + ';';
+      if (!/\d/.test(ch)) return '<span class="odo-sym" aria-hidden="true" style="' + pos + '">' + ch + '</span>';
+      return '<span class="odo" aria-hidden="true" style="' + pos + '"><span class="odo-reel" style="--n:' + (+ch + 10) + ';--o:' + (reel++) + '">' + REEL + '</span></span>';
+    }).join('');
+    void el.offsetWidth;
+    el.classList.add('rolling');
   }
   langListeners.push(function () {
-    counters.forEach(function (el) { if (el.dataset.done) el.textContent = formatCount(el, +el.dataset.count); });
+    counters.forEach(function (el) {
+      if (!el.dataset.done) return;
+      el.classList.remove('odometer', 'rolling');
+      el.removeAttribute('aria-label');
+      el.textContent = formatCount(el, +el.dataset.count);
+    });
   });
 
   /* =====================================================
@@ -296,6 +309,27 @@
   var sections = navLinks.map(function (a) { return $(a.getAttribute('href')); });
   var scrollRaf = 0;
 
+  // Sliding pill behind the active link. The first placement (and any re-measure after a
+  // resize or language change) jumps without animating; section changes slide.
+  var indicator = document.createElement('li');
+  indicator.className = 'nav-ind';
+  indicator.setAttribute('role', 'presentation');
+  indicator.setAttribute('aria-hidden', 'true');
+  $('.nav-links').appendChild(indicator);
+  var indicatorAt = -1;
+  function placeIndicator(active, instant) {
+    if (active === indicatorAt && !instant) return;
+    var wasHidden = indicatorAt === -1;
+    indicatorAt = active;
+    if (active < 0) { indicator.classList.remove('on'); return; }
+    var a = navLinks[active];
+    indicator.classList.toggle('instant', instant || wasHidden);
+    indicator.style.width = a.offsetWidth + 'px';
+    indicator.style.transform = 'translateX(' + a.offsetLeft + 'px)';
+    indicator.classList.add('on');
+  }
+  langListeners.push(function () { placeIndicator(indicatorAt, true); });
+
   function onScroll() {
     scrollRaf = 0;
     var y = window.scrollY;
@@ -309,11 +343,12 @@
       a.classList.toggle('active', i === active);
       if (i === active) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
+    placeIndicator(active, false);
   }
   window.addEventListener('scroll', function () {
     if (!scrollRaf) scrollRaf = requestAnimationFrame(onScroll);
   }, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('resize', function () { onScroll(); placeIndicator(indicatorAt, true); }, { passive: true });
 
   /* =====================================================
      Command palette
