@@ -675,41 +675,8 @@ html.js .device.in .device-screen { transform: perspective(1800px) rotateX(0deg)
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .mail-row { margin-top: var(--sp-xl); }
-/* The underline is a gradient stroke that draws in from the left on hover and retracts to the
-   right on leave (the anchor point flips between the two states). */
-.mail-big {
-  font-family: var(--font-display); font-size: 40px; font-weight: 600; line-height: 1.1;
-  color: var(--s-link); overflow-wrap: anywhere;
-  padding-bottom: 6px;
-  background: var(--gradient-on-dark) right bottom / 0% 2px no-repeat;
-  -webkit-box-decoration-break: clone; box-decoration-break: clone;
-  transition: background-size .55s cubic-bezier(.65, 0, .35, 1), color .3s var(--ease);
-}
-.mail-big:hover, .mail-big:focus-visible {
-  background-position: left bottom; background-size: 100% 2px;
-  color: #6cb8ff;
-}
-
-/* "Write an email": a band of light crosses the pill and a soft blue halo comes up on hover. */
-.contact .btn-primary { position: relative; overflow: hidden; isolation: isolate; transition: transform var(--t-fast) var(--ease), background-color var(--t-fast), box-shadow .4s var(--ease); }
-.contact .btn-primary::after {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, .45) 50%, transparent 65%) 100% 0 / 300% 100% no-repeat;
-}
-.contact .btn-primary:hover { box-shadow: 0 0 0 4px rgba(41, 151, 255, .22), 0 8px 30px -6px rgba(41, 151, 255, .55); }
-.contact .btn-primary:hover::after { background-position: 0% 0; transition: background-position .9s cubic-bezier(.3, .7, .2, 1); }
-
-/* "Copy address": on success the pill turns green, a check draws itself and the label says so. */
-.copy-btn .icon { width: 16px; height: 16px; }
-.copy-btn .ico-check, .copy-btn.copied .ico-copy { display: none; }
-.copy-btn.copied .ico-check { display: block; }
-.copy-btn .check-path { stroke-dasharray: 24; stroke-dashoffset: 24; }
-.copy-btn.copied {
-  color: #fff; background: #1f9d48; border-color: #1f9d48;
-  transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
-}
-.copy-btn.copied .check-path { animation: draw-check .45s .05s cubic-bezier(.65, 0, .35, 1) forwards; }
-@keyframes draw-check { to { stroke-dashoffset: 0; } }
+.mail-big { font-family: var(--font-display); font-size: 40px; font-weight: 600; line-height: 1.1; color: var(--s-link); overflow-wrap: anywhere; }
+.mail-big:hover { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
 
 /* =========================================================
    Footer (dense, Apple-style)
